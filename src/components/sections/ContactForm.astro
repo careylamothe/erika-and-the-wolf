@@ -1,0 +1,76 @@
+---
+// Progressive enhancement: works without JS via native POST,
+// enhanced with JS for inline validation feedback.
+---
+
+<form id="contact-form" method="POST" action="/api/contact" novalidate class="contact-form">
+  <div class="field">
+    <label for="name">Name <span aria-hidden="true">*</span></label>
+    <input id="name" name="name" type="text" autocomplete="name"
+      required minlength="2" aria-describedby="name-error" />
+    <span id="name-error" class="field-error" role="alert"></span>
+  </div>
+
+  <div class="field">
+    <label for="email">Email <span aria-hidden="true">*</span></label>
+    <input id="email" name="email" type="email" autocomplete="email"
+      required aria-describedby="email-error" />
+    <span id="email-error" class="field-error" role="alert"></span>
+  </div>
+
+  <div class="field">
+    <label for="subject">Subject <span aria-hidden="true">*</span></label>
+    <select id="subject" name="subject" required aria-describedby="subject-error">
+      <option value="">Please select…</option>
+      <option value="booking">Concert Booking</option>
+      <option value="press">Press Enquiry</option>
+      <option value="general">General</option>
+    </select>
+    <span id="subject-error" class="field-error" role="alert"></span>
+  </div>
+
+  <div class="field">
+    <label for="message">Message <span aria-hidden="true">*</span></label>
+    <textarea id="message" name="message" rows="6"
+      required minlength="10" aria-describedby="message-error"></textarea>
+    <span id="message-error" class="field-error" role="alert"></span>
+  </div>
+
+  <div id="form-status" role="status" aria-live="polite"></div>
+
+  <button type="submit" class="btn btn--primary">Send Message</button>
+</form>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status")!;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      body: new FormData(form),
+    });
+    const json = await res.json();
+
+    if (json.ok) {
+      form.reset();
+      status.textContent = "Message sent! We'll be in touch soon.";
+    } else if (json.errors) {
+      for (const [field, msg] of Object.entries(json.errors)) {
+        const el = document.getElementById(`${field}-error`);
+        if (el) el.textContent = msg as string;
+      }
+      status.textContent = "Please correct the errors above.";
+    } else {
+      status.textContent = json.message ?? "Something went wrong. Please try again.";
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Send Message";
+  });
+</script>

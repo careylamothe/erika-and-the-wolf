@@ -1,0 +1,41 @@
+{
+  "title": "Edmonds Art Walk",
+  "date": "2026-03-19",
+  "venue": "North Sound Church",
+  "city": "Edmonds, WA",
+  "ticketUrl": "https://northsoundchurch.com/events",
+  "flyerImage": "/images/concerts/2026-03-19-edmonds-artwalk.webp",
+  "isFeatured": true,
+  "programme": [
+    {
+      "composer": "Hedwige Chretien",
+      "title": "Wind Quintet in g minor",
+      "duration": "8'"
+    },
+    {
+      "composer": "Thomas Breadon Jr.",
+      "title": "Aesop's Fables",
+      "duration": "10'"
+    },
+    {
+      "composer": "Nikolai Rimsky-Korsakov",
+      "title": "Flight of the Bunblebee",
+      "duration": "3'"
+    },
+    {
+      "composer": "Modeste Mussorgsky",
+      "title": "Bydlo",
+      "duration": "3'"
+    },
+    {
+      "composer": "Henry Mancini",
+      "title": "Bydlo",
+      "duration": "3'"
+    },
+    {
+      "composer": "Sergei Prokofiev",
+      "title": "Peter and the Wolf",
+      "duration": "14'"
+    }
+  ]
+}

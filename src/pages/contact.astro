@@ -1,0 +1,40 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import ContactForm from "@/components/sections/ContactForm.astro";
+
+// Handle no-JS progressive enhancement POST
+if (Astro.request.method === "POST") {
+  const { validateContactForm } = await import("@/lib/validate");
+  const { sendContactEmail } = await import("@/lib/email");
+  const data = await Astro.request.formData();
+  const result = validateContactForm(data);
+
+  if (result.ok) {
+    try {
+      await sendContactEmail({
+        name: data.get("name") as string,
+        email: data.get("email") as string,
+        subject: data.get("subject") as string,
+        message: data.get("message") as string,
+      });
+      return Astro.redirect("/contact?sent=true");
+    } catch (err) {
+      console.error("Email send failed:", err);
+      return Astro.redirect("/contact?error=true");
+    }
+  }
+}
+
+const sent = Astro.url.searchParams.get("sent") === "true";
+const failed = Astro.url.searchParams.get("error") === "true";
+---
+
+<PageLayout
+  title="Contact | Erika & the Wolf"
+  description="Book our woodwind quintet or get in touch."
+  heading="Get in Touch"
+>
+  {sent && <p class="success-banner" role="status">Message sent! We'll be in touch soon.</p>}
+  {failed && <p class="error-banner" role="alert">Failed to send message. Please try again.</p>}
+  <ContactForm />
+</PageLayout>

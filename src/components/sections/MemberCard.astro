@@ -1,0 +1,20 @@
+---
+import type { Member } from "@/types";
+
+export interface Props {
+  member: Member;
+}
+const { member } = Astro.props;
+---
+
+<article class="member-card">
+  <img src={member.photoUrl} alt={`Photo of ${member.name}`} width="300" height="300" />
+  <div class="member-info">
+    <h2>{member.name}</h2>
+    <p class="instrument">{member.instrument}</p>
+    <p class="bio">{member.bio}</p>
+    {member.website && (
+      <a href={member.website} target="_blank" rel="noopener">Personal website</a>
+    )}
+  </div>
+</article>

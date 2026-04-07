@@ -1,0 +1,37 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import MemberCard from "@/components/sections/MemberCard.astro";
+import { getCollection } from "astro:content";
+
+const allMembers = await getCollection("members");
+
+const instrumentOrder = ["flute", "oboe", "clarinet", "horn", "bassoon", "narrator"];
+const members = allMembers.sort(
+  (a, b) =>
+    instrumentOrder.indexOf(a.data.instrument) -
+    instrumentOrder.indexOf(b.data.instrument)
+);
+---
+<PageLayout
+  title="Musicians | Erika & the Wolf"
+  description="Meet the musicians of Erika & the Wolf woodwind quintet."
+  heading="Meet the Ensemble"
+>
+  <img
+    src="/images/peter-wolf-ensemble.jpg"
+    alt="Erika & the Wolf woodwind quintet"
+    class="ensemble-photo"
+  />
+  <div class="members-list">
+    {members.map((m) => (
+      <MemberCard member={{
+        id: m.id,
+        name: m.data.name,
+        instrument: m.data.instrument,
+        photoUrl: m.data.photoUrl,
+        bio: m.data.bio,
+        website: m.data.website,
+      }} />
+    ))}
+  </div>
+</PageLayout>

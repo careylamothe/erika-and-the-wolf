@@ -1,0 +1,36 @@
+---
+import type { Concert } from "@/types";
+import { formatConcertDate } from "@/lib/concerts";
+
+export interface Props {
+  concert: Concert;
+}
+const { concert } = Astro.props;
+---
+
+<article class="concert-card">
+  {concert.flyerImage && (
+    <img src={concert.flyerImage} alt={`${concert.title} flyer`} class="concert-flyer" />
+  )}
+  <time datetime={concert.date.toISOString()}>{formatConcertDate(concert.date)}{concert.time && ` · ${concert.time}`}</time>
+  <h2>{concert.title}</h2>
+  <p class="venue">{concert.venue} — {concert.city}</p>
+
+  {concert.programme.length > 0 && (
+    <ul class="programme" aria-label="Programme">
+      {concert.programme.map((item) => (
+        <li>
+          <span class="composer">{item.composer}</span>
+          <span class="piece-title">{item.title}</span>
+          {item.duration && <span class="duration">{item.duration}</span>}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {concert.ticketUrl && (
+    <a href={concert.ticketUrl} class="btn btn--primary" target="_blank" rel="noopener">
+      Get Info
+    </a>
+  )}
+</article>

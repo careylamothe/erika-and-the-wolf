@@ -1,0 +1,19 @@
+---
+export interface Props {
+  src: string;
+  title: string;
+  composer?: string;
+}
+const { src, title, composer } = Astro.props;
+---
+
+<figure class="audio-player">
+  <figcaption>
+    {composer && <span class="composer">{composer} — </span>}
+    <span class="track-title">{title}</span>
+  </figcaption>
+  <audio controls preload="metadata">
+    <source src={src} type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+</figure>

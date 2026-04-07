@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { concertFromEntry, formatConcertDate } from "@/lib/concerts";
+
+const allConcerts = await getCollection("concerts");
+const now = new Date();
+
+const nextConcert = allConcerts
+  .map(concertFromEntry)
+  .filter((c) => c.date >= now)
+  .sort((a, b) => a.date.getTime() - b.date.getTime())[0];
+---
+
+<BaseLayout
+  title="Erika & the wolf | Woodwind Quintet"
+  description="A woodwind quintet performing chamber music at the highest level."
+>
+  <section class="hero" aria-label="Welcome">
+    <h1>Erika & the Wolf</h1>
+    <p class="hero-tagline">Lupine Woodwind Quintet's Musical Storytime for Children</p>
+    <div class="hero-actions">
+      <a href="/concerts" class="btn btn--primary">Upcoming Concerts</a>
+      <a href="/contact" class="btn btn--outline">Book Us</a>
+    </div>
+  </section>
+
+  {nextConcert && (
+    <section aria-labelledby="next-concert-heading" class="pl-6">
+      <h2 id="next-concert-heading">Next Performance</h2>
+      <p>
+        {formatConcertDate(nextConcert.date)}
+        {nextConcert.time && ` · ${nextConcert.time}`}
+        {` — ${nextConcert.venue}, ${nextConcert.city}`}
+      </p>
+    </section>
+  )}
+</BaseLayout>

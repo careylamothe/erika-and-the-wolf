@@ -1,0 +1,16 @@
+---
+export interface Props {
+  heading: string;
+  tagline?: string;
+}
+const { heading, tagline } = Astro.props;
+---
+
+<section class="hero" aria-label="Welcome">
+  <h1>{heading}</h1>
+  {tagline && <p class="hero-tagline">{tagline}</p>}
+  <div class="hero-actions">
+    <a href="/concerts" class="btn btn--primary">Upcoming Concerts</a>
+    <a href="/contact" class="btn btn--outline">Book Us</a>
+  </div>
+</section>

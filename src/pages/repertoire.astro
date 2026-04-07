@@ -1,0 +1,28 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import RepertoireTable from "@/components/sections/RepertoireTable.astro";
+import { getCollection } from "astro:content";
+
+const allEntries = await getCollection("repertoire");
+
+const entries = allEntries
+  .map((e) => ({
+    id: e.id,
+    composer: e.data.composer,
+    title: e.data.title,
+    year: e.data.year,
+    duration: e.data.duration,
+    movements: e.data.movements,
+    tags: e.data.tags,
+    notes: e.data.notes,
+  }))
+  .sort((a, b) => a.composer.localeCompare(b.composer));
+---
+
+<PageLayout
+  title="Repertoire | Erika & the Wolf"
+  description="Woodwind quintet repertoire performed by Erika & the Wolf."
+  heading="Repertoire"
+>
+  <RepertoireTable entries={entries} />
+</PageLayout>

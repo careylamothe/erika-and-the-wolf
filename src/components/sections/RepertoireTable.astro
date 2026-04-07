@@ -1,0 +1,63 @@
+---
+import type { RepertoireEntry } from "@/types";
+
+export interface Props {
+  entries: RepertoireEntry[];
+}
+const { entries } = Astro.props;
+---
+
+<div class="repertoire-filters" role="group" aria-label="Filter repertoire">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="standard">Standard</button>
+  <button class="filter-btn" data-filter="contemporary">Contemporary</button>
+  <button class="filter-btn" data-filter="transcription">Transcription</button>
+  <button class="filter-btn" data-filter="commission">Commission</button>
+</div>
+
+<table class="repertoire-table" aria-label="Repertoire list">
+  <thead>
+    <tr>
+      <th scope="col">Composer</th>
+      <th scope="col">Work</th>
+      <th scope="col">Year</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    {entries.map((entry) => (
+      <tr data-tags={entry.tags.join(" ")}>
+        <td>{entry.composer}</td>
+        <td>
+          {entry.title}
+          {entry.notes && <span class="repertoire-note">{entry.notes}</span>}
+        </td>
+        <td>{entry.year ?? "—"}</td>
+        <td>{entry.duration ?? "—"}</td>
+        <td>
+          {entry.tags.map((tag) => (
+            <span class={`tag tag--${tag}`}>{tag}</span>
+          ))}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const rows = document.querySelectorAll<HTMLTableRowElement>("tbody tr");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.dataset.filter!;
+      rows.forEach((row) => {
+        const tags = row.dataset.tags ?? "";
+        row.hidden = filter !== "all" && !tags.includes(filter);
+      });
+    });
+  });
+</script>

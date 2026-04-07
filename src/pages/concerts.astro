@@ -1,0 +1,41 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import ConcertCard from "@/components/sections/ConcertCard.astro";
+import { getCollection } from "astro:content";
+import { concertFromEntry } from "@/lib/concerts";
+
+const allConcerts = await getCollection("concerts");
+const now = new Date();
+
+const concerts = allConcerts.map(concertFromEntry);
+
+const upcoming = concerts
+  .filter((c) => c.date >= now)
+  .sort((a, b) => a.date.getTime() - b.date.getTime());
+
+const past = concerts
+  .filter((c) => c.date < now)
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+---
+
+<PageLayout
+  title="Concerts | Erika & the Wolf"
+  description="Upcoming and past performances."
+  heading="Concerts"
+>
+  <section aria-labelledby="upcoming-heading">
+    <h2 id="upcoming-heading">Upcoming Performances</h2>
+    {upcoming.length === 0
+      ? <p>No upcoming concerts scheduled. Check back soon.</p>
+      : upcoming.map((c) => <ConcertCard concert={c} />)
+    }
+  </section>
+
+  <section aria-labelledby="past-heading">
+    <h2 id="past-heading">Past Performances</h2>
+    {past.length === 0
+      ? <p>No past concerts to display.</p>
+      : past.map((c) => <ConcertCard concert={c} />)
+    }
+  </section>
+</PageLayout>

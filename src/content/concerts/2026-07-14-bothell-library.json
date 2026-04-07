@@ -1,0 +1,26 @@
+{
+  "title": "A Musical Storytime for Children",
+  "date": "2026-07-14",
+  "time": "7:00 PM",
+  "venue": "Bothell Library Evening Program",
+  "city": "Bothell, WA",
+  "ticketUrl": "https://kcls.bibliocommons.com/v2/locations?name=bothell",
+  "isFeatured": true,
+  "programme": [
+    {
+      "composer": "Hedwige Chretien",
+      "title": "Wind Quintet in g minor",
+      "duration": "8'"
+    },
+    {
+      "composer": "Thomas Breadon Jr.",
+      "title": "Aesop's Fables",
+      "duration": "10'"
+    },
+    {
+      "composer": "Sergei Prokofiev",
+      "title": "Peter and the Wolf",
+      "duration": "14'"
+    }
+  ]
+}
