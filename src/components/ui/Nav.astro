@@ -44,6 +44,54 @@ const current = Astro.url.pathname;
   </ul>
 </nav>
 
+<style>
+  #nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  #nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  @media (max-width: 768px) {
+    #nav-toggle {
+      display: flex;
+    }
+
+    #nav-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      flex-direction: column;
+      padding: 1rem 1.5rem;
+      gap: 1rem;
+      z-index: 99;
+    }
+
+    #nav-menu[data-open] {
+      display: flex;
+    }
+
+    nav {
+      position: relative;
+      flex-wrap: wrap;
+    }
+  }
+</style>
+
 <script>
   const toggle = document.getElementById("nav-toggle")!;
   const menu = document.getElementById("nav-menu")!;
