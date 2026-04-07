@@ -1,19 +1,18 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import node from "@astrojs/node";
 import tailwindcss from "@tailwindcss/vite";
-import { fileURLToPath } from "url";
+import vercel from "@astrojs/vercel";
 
 export default defineConfig({
-  site: "https://contact.careylamothe.com",
+  site: "https://erika-and-the-wolf.vercel.app",
   output: "server",
-  adapter: node({ mode: "standalone" }),
+  adapter: vercel(),
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "@": new URL("./src", import.meta.url).pathname,
       },
     },
   },
