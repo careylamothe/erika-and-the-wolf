@@ -25,24 +25,24 @@ const { entries } = Astro.props;
       <th scope="col">Tags</th>
     </tr>
   </thead>
-  <tbody>
-    {entries.map((entry) => (
-      <tr data-tags={entry.tags.join(" ")}>
-        <td>{entry.composer}</td>
-        <td>
-          {entry.title}
-          {entry.notes && <span class="repertoire-note">{entry.notes}</span>}
-        </td>
-        <td>{entry.year ?? "—"}</td>
-        <td>{entry.duration ?? "—"}</td>
-        <td>
-          {entry.tags.map((tag) => (
-            <span class={`tag tag--${tag}`}>{tag}</span>
-          ))}
-        </td>
-      </tr>
-    ))}
-  </tbody>
+<tbody>
+  {entries.map((entry) => (
+    <tr data-tags={entry.tags.join(" ")}>
+      <td data-label="Composer">{entry.composer}</td>
+      <td data-label="Work">
+        {entry.title}
+        {entry.notes && <span class="repertoire-note"> {entry.notes}</span>}
+      </td>
+      <td data-label="Year">{entry.year ?? "—"}</td>
+      <td data-label="Duration">{entry.duration ?? "—"}</td>
+      <td data-label="Tags">
+        {entry.tags.map((tag) => (
+          <span class={`tag tag--${tag}`}>{tag}</span>
+        ))}
+      </td>
+    </tr>
+  ))}
+</tbody>
 </table>
 
 <script>

@@ -213,56 +213,56 @@
   }
 
   /* Media page */
-.media-section {
-  margin-bottom: var(--space-12);
-}
+  .media-section {
+    margin-bottom: var(--space-12);
+  }
 
-.media-section h2 {
-  margin-bottom: var(--space-6);
-}
+  .media-section h2 {
+    margin-bottom: var(--space-6);
+  }
 
-.video-wrapper {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: #000;
-}
+  .video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #000;
+  }
 
-.video-wrapper iframe {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+  .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 
-/* Gallery grid */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--space-3);
-}
+  /* Gallery grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
+  }
 
-.gallery-thumb {
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--color-border);
-  aspect-ratio: 4 / 3;
-}
+  .gallery-thumb {
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-border);
+    aspect-ratio: 4 / 3;
+  }
 
-.gallery-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.2s ease;
-}
+  .gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s ease;
+  }
 
-.gallery-thumb:hover img {
-  transform: scale(1.04);
-}
+  .gallery-thumb:hover img {
+    transform: scale(1.04);
+  }
 
   /* Lightbox */
   .lightbox {
@@ -332,6 +332,104 @@
   #lightbox-next:hover,
   #lightbox-close:hover {
     opacity: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* ── Nav ── */
+  #nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    z-index: 10;
+  }
+
+  #nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+  }
+
+  #nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: column;
+    padding: var(--space-4) var(--space-6);
+    gap: var(--space-4);
+    z-index: 99;
+  }
+
+  #nav-menu[data-open] {
+    display: flex;
+  }
+
+  nav {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  /* ── Member cards ── */
+  .member-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .member-card img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .member-info a {
+    display: block;
+    text-align: center;
+  }
+
+  /* ── Repertoire table ── */
+  .repertoire-table thead {
+    display: none;
+  }
+
+  .repertoire-table tr {
+    display: block;
+    border-bottom: 2px solid var(--color-border);
+    padding: var(--space-4) 0;
+  }
+
+  .repertoire-table td {
+    display: block;
+    border: none;
+    padding: var(--space-1) 0;
+  }
+
+  .repertoire-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Concert programme ── */
+  .programme li {
+    flex-wrap: wrap;
+  }
+
+  .composer {
+    width: 100%;
   }
 }
 
