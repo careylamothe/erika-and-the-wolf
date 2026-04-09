@@ -37,7 +37,7 @@ const members = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/members" }),
   schema: z.object({
     name: z.string(),
-    instrument: z.enum(["flute", "oboe", "clarinet", "horn", "bassoon"]),
+    instrument: z.enum(["flute", "oboe", "clarinet", "horn", "bassoon", "narrator"]),
     photoUrl: z.string(),
     bio: z.string(),
     website: z.string().url().optional(),

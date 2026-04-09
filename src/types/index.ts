@@ -51,7 +51,8 @@ export type WoodwindInstrument =
   | "oboe"
   | "clarinet"
   | "horn"
-  | "bassoon";
+  | "bassoon"
+  | "narrator";
 
 // ── Forms ─────────────────────────────────────────────────────────────────────
 export interface ContactFormData {
