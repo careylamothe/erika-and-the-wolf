@@ -1,0 +1,16 @@
+{
+  "title": "Shoultes Elementary",
+  "date": "2026-06-03",
+  "venue": "Sponsored by Ladies Musical Club of Seattle",
+  "city": "Marysville, WA",
+  "ticketUrl": "https://lmcseattle.org/",
+  "flyerImage": "/images/concerts/2026-06-03-shoultes.webp",
+  "isFeatured": true,
+  "programme": [
+    {
+      "composer": "Sergei Prokofiev",
+      "title": "Peter and the Wolf",
+      "duration": "14'"
+    }
+  ]
+}
